@@ -19,12 +19,14 @@ class SwapiService {
     return this.getResource(`/people/${id}/`);
   }
 
-  getAllPlanets = () => {
-    return this.getResource('/planets/');
+  getAllPlanets = async () => {
+    const planets = await this.getResource('/planets/');
+    return await planets.map(this._transformPlanet)
   }
 
-  getPlanet = (id) => {
-    return this.getResource(`/planets/${id}/`)
+  getPlanet = async(id) => {
+    const planet = await this.getResource(`/planets/${id}/`);
+    return await this._transformPlanet(planet)
   }
 
   getAllStarships = () => {
@@ -33,6 +35,21 @@ class SwapiService {
 
   getStarship = (id) => {
     return this.getResource(`/starships/${id}`)
+  }
+
+  _extractId = (item) => {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return item.url.match(idRegExp)[1];
+  }
+
+  _transformPlanet = (planet) => {
+    return {
+      id: this._extractId(planet),
+      name: planet.name,
+      population: planet.population,
+      rotationPeriod: planet.rotation_period,
+      diameter: planet.diameter
+    }
   }
 }
 
