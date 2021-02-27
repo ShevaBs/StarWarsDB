@@ -1,0 +1,21 @@
+.error-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.error-indicator img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.error-indicator span {
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: tomato;
+}
