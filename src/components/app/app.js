@@ -1,37 +1,41 @@
-import React, { Component } from 'react'
-import Header from '../header/'
-import ItemList from '../item-list'
-import PersonDetails from '../person-details'
-import RandomPlanet from '../random-planet'
+import React, { Component } from 'react';
+import ErrorButton from '../error-button/error-button';
+import ErrorIndicator from '../error-indicator/error-indicator';
+import Header from '../header/';
+import RandomPlanet from '../random-planet';
+import PeoplePage from '../people-page';
 
 export default class App extends Component {
 
   state = {
-    personId: null
+    hasError: false
   }
 
-  onPersonSelected = (id) => {
-    this.setState({personId: id})
+  componentDidCatch() {
+    this.setState({
+      hasError: true
+    })
   }
+
+  
   
   render() {
-    const {personId} = this.state;
+    const {hasError} = this.state;
     
+    if(hasError) {
+      return <ErrorIndicator/>
+    }
 
     
     return (
       <div className='container-md'>
         <Header/>
         <RandomPlanet/>
-  
-        <div className='row mb2'>
-          <div className='col-md-6'>
-            <ItemList onPersonSelected={this.onPersonSelected}/>
-          </div>
-          <div className='col-md-6'>
-            <PersonDetails personId={personId}/>
-          </div>
-        </div>
+        <ErrorButton/>
+
+        <PeoplePage/>
+        <PeoplePage/>
+        <PeoplePage/>
       </div>
     )
   }
