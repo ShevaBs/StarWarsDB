@@ -13,30 +13,33 @@ class SwapiService {
 
   getAllPeople = async () => {
     const people = await this.getResource('/people/');
-    return await people.results.map(this._transformPeople);
+    return people.results.map(this._transformPeople);
   }
 
   getPerson = async (id) => {    
     const person = await this.getResource(`/people/${id}/`);
-    return await this._transformPeople(person)
+    return this._transformPeople(person);
   }
 
   getAllPlanets = async () => {
     const planets = await this.getResource('/planets/');
-    return await planets.map(this._transformPlanet)
+    return planets.results.map(this._transformPlanet)
   }
 
   getPlanet = async(id) => {
     const planet = await this.getResource(`/planets/${id}/`);
-    return await this._transformPlanet(planet)
+    return this._transformPlanet(planet)
   }
 
-  getAllStarships = () => {
-    return this.getResource('/starships/')
+  getAllStarships = async () => {
+    const starships = await this.getResource('/starships/');
+    return starships.results.map(this._transformStarships);
   }
 
   getStarship = (id) => {
-    return this.getResource(`/starships/${id}`)
+    const starship = this.getResource(`/starships/${id}`)
+    return this._transformStarships(starship);
+
   }
 
   _extractId = (item) => {
@@ -61,6 +64,20 @@ class SwapiService {
       gender: people.gender,
       birthYear: people.birth_year,
       eyeColor: people.eye_color
+    }
+  }
+
+  _transformStarships = (starship) => {
+    return {
+      id: this._extractId(starship),
+      name: starship.name,
+      model: starship.model,
+      manufacturer: starship.manufacturer,
+      costInCredits: starship.cost_in_credits,
+      length: starship.length,
+      crew: starship.crew,
+      passengers: starship.passengers,
+      cargoCapacity: starship.cargo_capacity
     }
   }
 }
