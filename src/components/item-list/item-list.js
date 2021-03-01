@@ -3,7 +3,7 @@ import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 import './item-list.css';
 
-class ItemList extends Component {
+class  ItemList extends Component {
  
   state = {
     itemList: null
@@ -20,12 +20,15 @@ class ItemList extends Component {
 
 
   renderItems = (arr) => {
-    return arr.map(({name, id}) => {
+    return arr.map((item) => {
+      const {id} = item;
+
+      const label = this.props.renderItem(item)
       return (
         <li className='list-group-item'
           key={id}
           onClick={() => this.props.onItemSelected(id)}>
-          {name}
+          {label}
         </li>
       )
     })
