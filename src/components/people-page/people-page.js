@@ -5,6 +5,7 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
+import ErrorBoundary from "../error-boundary";
 
 export default class PeoplePage extends Component {
   swapiService = new SwapiService();
@@ -32,12 +33,19 @@ export default class PeoplePage extends Component {
     const itemList = (
       <ItemList
         onPersonSelected={this.onItemSelected}
-        getData={this.swapiService.getAllPeople}
-        renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear} )`}/>
+        getData={this.swapiService.getAllPeople}>
+        {
+          (i) => (
+            `${i.name} (${i.birthYear} )`
+          )
+        }
+      </ItemList>
     );
 
     const personDetails = (
-      <PersonDetails personId={personId}/>
+      <ErrorBoundary>
+        <PersonDetails personId={personId}/>
+      </ErrorBoundary>
     );
 
     return (
