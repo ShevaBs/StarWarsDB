@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ErrorButton from '../error-button/error-button';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import PersonDetails from '../item-details';
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
 import ErrorBoundary from "../error-boundary";
