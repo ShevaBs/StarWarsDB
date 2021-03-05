@@ -52,6 +52,10 @@ class SwapiService {
     return `${this._imageBase}/characters/${id}.jpg`
   }
 
+  getPlanetImage = ({id}) => {
+    return `${this._imageBase}/planets/${id}.jpg`
+  }
+
   getStarshipImage = ({id}) => {
     return `${this._imageBase}/starships/${id}.jpg`
   }
