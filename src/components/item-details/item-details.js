@@ -36,7 +36,7 @@ export default class ItemDetails extends Component {
   }
 
   updateItem = () => {
-    const {getData, itemId, itemImage} = this.props;
+    const {getData, itemId, itemUrl} = this.props;
 
     if(!itemId) {
       return;
@@ -46,7 +46,7 @@ export default class ItemDetails extends Component {
       .then((item) => {
         this.setState({
           item,
-          image: itemImage(item),
+          image: itemUrl(item),
           loading: false
         })
       });
