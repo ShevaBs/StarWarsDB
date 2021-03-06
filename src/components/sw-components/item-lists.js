@@ -1,5 +1,5 @@
 import ItemList from '../item-list';
-import withData from '../hoc-helper';
+import {withData} from '../hoc-helper';
 import SwapiService from '../../services/swapi-service';
 
 const swapiService = new SwapiService();
